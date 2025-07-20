@@ -3,69 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Inspiration</title>
+    <title>Daily Doodle</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
+        /* --- GRUNDGERÜST & LAYOUT --- */
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            /* Der tägliche Farbverlauf wird per JavaScript hier eingefügt */
+            transition: background 1s ease;
         }
+
+        .app-wrapper {
+            display: flex;
+            flex-direction: column; /* Elemente untereinander anordnen */
+            justify-content: flex-start; /* Elemente oben starten lassen */
+            align-items: center;
+            min-height: 100vh;
+            padding: 5vh 20px 5vh 20px; /* Oben und unten Abstand */
+            box-sizing: border-box;
+        }
+
+        /* --- DIE KARTE --- */
         .container {
+            width: 100%;
+            max-width: 600px;
             padding: 40px;
             background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            box-sizing: border-box;
         }
-        h1 {
-            font-size: 2em;
+
+        /* --- TEXTE & INHALTE --- */
+        #date-line {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        #prompt-title {
+            font-family: 'Lobster', cursive;
+            font-size: 2.8em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        #prompt-description {
+            font-size: 1.1em;
             color: #333;
+            margin-top: 15px;
+            line-height: 1.6;
         }
-        button {
+
+        /* --- BUTTON & NACHRICHTEN --- */
+        #new-prompt-button {
             margin-top: 30px;
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 1em;
+            font-weight: 600;
             cursor: pointer;
-            border: none;
-            background-color: #007aff;
+            border: 2px solid #333; /* Dünner schwarzer Rahmen */
+            background-color: white;
+            color: #333;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        #new-prompt-button:hover:not(:disabled) {
+            background-color: #333;
             color: white;
-            border-radius: 8px;
+        }
+        
+        #new-prompt-button:disabled {
+            background-color: #f0f0f0; /* Grauer Hintergrund */
+            border-color: #ccc;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        #message-area {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #e74c3c; /* Eine auffällige Farbe */
+            min-height: 20px; /* Verhindert Springen des Layouts */
+        }
+
+        /* --- TEXT UNTER DER KARTE --- */
+        .footer-text {
+            margin-top: 30px;
+            color: #555;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1 id="prompt">Hier steht deine Inspiration...</h1>
-        <button onclick="neuerSatz()">Neue Inspiration</button>
+    <div class="app-wrapper">
+        <div class="container">
+            <div id="date-line"></div>
+            <h2 id="prompt-title">Lädt...</h2>
+            <p id="prompt-description"></p>
+            <button id="new-prompt-button">Neue Inspiration</button>
+            <div id="message-area"></div>
+        </div>
+        <p class="footer-text">Viel Spaß beim Doodeln!</p>
     </div>
 
     <script>
-        const saetze = [
-            // HIER DEINE SÄTZE EINFÜGEN
-            "Zeichne einen schwebenden Leuchtturm.",
-            "Was wäre, wenn Tiere Werkzeuge benutzen könnten?",
-            "Ein Roboter, der versucht, eine Katze zu streicheln.",
-            "Ein Baumhaus in einer riesigen Pilzlandschaft.",
-            "Ein Porträt aus geometrischen Formen."
-            // DER LETZTE SATZ HAT KEIN KOMMA
-        ];
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- ELEMENTE AUSWÄHLEN ---
+            const body = document.body;
+            const dateLine = document.getElementById('date-line');
+            const promptTitle = document.getElementById('prompt-title');
+            const promptDescription = document.getElementById('prompt-description');
+            const newPromptButton = document.getElementById('new-prompt-button');
+            const messageArea = document.getElementById('message-area');
 
-        const promptAnzeige = document.getElementById('prompt');
+            // --- DEINE EINSTELLUNGEN ---
+            const MAX_CLICKS_PER_DAY = 3;
+            const RECENTLY_USED_LIMIT = 3; // Wie viele letzte Prompts merken?
+            const dailyGradients = [
+                'linear-gradient(135deg, #f5e1e1, #e6d3f2)',
+                'linear-gradient(135deg, #d3e6f2, #e1f5e1)',
+                'linear-gradient(135deg, #f2e6d3, #f5e1e1)',
+                'linear-gradient(135deg, #e1f5f5, #d3e6f2)'
+            ];
 
-        function neuerSatz() {
-            const zufallsIndex = Math.floor(Math.random() * saetze.length);
-            promptAnzeige.innerText = saetze[zufallsIndex];
-        }
+            let prompts = []; // Wird mit den Daten aus der JSON-Datei gefüllt
+            let userState = {};
 
-        // Zeigt direkt beim Laden einen ersten Satz an
-        neuerSatz();
+            // --- HAUPTFUNKTION: INITIALISIERT DIE APP ---
+            async function initApp() {
+                loadState();
+                setDailyDesign();
+                updateDateLine();
+                
+                try {
+                    prompts = await fetchPrompts();
+                    displayNewPrompt();
+                    updateButtonState();
+                } catch (error) {
+                    promptTitle.textContent = "Fehler";
+                    promptDescription.textContent = "Inspirationen konnten nicht geladen werden.";
+                    console.error("Fehler beim Laden der Prompts:", error);
+                }
+            }
+
+            // --- DATEN & STATUS LADEN / SPEICHERN ---
+            function loadState() {
+                const today = new Date().toISOString().slice(0, 10); // Format: YYYY-MM-DD
+                const storedState = JSON.parse(localStorage.getItem('doodleAppState')) || {};
+
+                if (storedState.date === today) {
+                    userState = storedState;
+                } else {
+                    // Neuer Tag! Alles zurücksetzen.
+                    userState = {
+                        date: today,
+                        clicks: 0,
+                        lastUsedIndices: []
+                    };
+                }
+                saveState();
+            }
+
+            function saveState() {
+                localStorage.setItem('doodleAppState', JSON.stringify(userState));
+            }
+
+            async function fetchPrompts() {
+                const response = await fetch('prompts.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.json();
+            }
+
+            // --- DESIGN & ANZEIGE ---
+            function setDailyDesign() {
+                const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+                const gradientIndex = dayOfYear % dailyGradients.length;
+                body.style.background = dailyGradients[gradientIndex];
+            }
+
+            function updateDateLine() {
+                const today = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
+                const formattedDate = today.toLocaleDateString('de-DE', options);
+                dateLine.textContent = `${formattedDate} - deine heutige Inspiration`;
+            }
+
+            function displayNewPrompt() {
+                if (prompts.length === 0) return;
+
+                // Filtert die bereits kürzlich genutzten Prompts heraus
+                const availablePrompts = prompts
+                    .map((prompt, index) => ({ ...prompt, originalIndex: index }))
+                    .filter(prompt => !userState.lastUsedIndices.includes(prompt.originalIndex));
+
+                // Wenn alle schon mal dran waren, wird die "zuletzt gesehen" Liste zurückgesetzt.
+                const listToUse = availablePrompts.length > 0 ? availablePrompts : prompts;
+
+                const randomIndex = Math.floor(Math.random() * listToUse.length);
+                const selectedPrompt = listToUse[randomIndex];
+
+                promptTitle.textContent = selectedPrompt.title;
+                promptDescription.textContent = selectedPrompt.description;
+
+                // Update der "zuletzt gesehen" Liste
+                userState.lastUsedIndices.push(selectedPrompt.originalIndex);
+                if (userState.lastUsedIndices.length > RECENTLY_USED_LIMIT) {
+                    userState.lastUsedIndices.shift(); // Entfernt das älteste Element
+                }
+                saveState();
+            }
+            
+            function updateButtonState() {
+                messageArea.textContent = ''; // Nachricht zurücksetzen
+                if (userState.clicks >= MAX_CLICKS_PER_DAY) {
+                    newPromptButton.disabled = true;
+                    messageArea.textContent = 'Denk nicht zu viel nach und mal jetzt einfach für diese Idee.';
+                } else if (userState.clicks === MAX_CLICKS_PER_DAY - 1) {
+                    messageArea.textContent = 'Du hast nur noch eine Chance.';
+                    newPromptButton.disabled = false;
+                } else {
+                    newPromptButton.disabled = false;
+                }
+            }
+
+
+            // --- EVENT LISTENER FÜR DEN BUTTON ---
+            newPromptButton.addEventListener('click', () => {
+                if (userState.clicks < MAX_CLICKS_PER_DAY) {
+                    userState.clicks++;
+                    displayNewPrompt();
+                    updateButtonState();
+                    saveState();
+                }
+            });
+
+            // --- APP STARTEN ---
+            initApp();
+        });
     </script>
-
 </body>
 </html>
