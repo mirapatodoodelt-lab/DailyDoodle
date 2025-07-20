@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Doodle</title>
     
+    <!-- Neue Schriften von Google Fonts: Poppins und Lobster -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@
             justify-content: flex-start; /* Elemente oben starten lassen */
             align-items: center;
             min-height: 100vh;
-            padding: 5vh 20px 5vh 20px; /* Oben und unten Abstand */
+            padding: 10vh 20px 5vh 20px; /* Oben mehr Abstand, um die Karte nach oben zu schieben */
             box-sizing: border-box;
         }
 
@@ -32,7 +33,7 @@
         .container {
             width: 100%;
             max-width: 600px;
-            padding: 40px;
+            padding: 30px 40px;
             background-color: white;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
@@ -45,11 +46,12 @@
             font-size: 0.9em;
             color: #888;
             margin-bottom: 20px;
+            line-height: 1.5; /* Verbessert den Abstand beim Zeilenumbruch */
         }
 
         #prompt-title {
             font-family: 'Lobster', cursive;
-            font-size: 2.8em;
+            font-size: 2.4em; /* ANGEPASST: Etwas kleiner für bessere Harmonie */
             color: #2c3e50;
             margin: 0;
             line-height: 1.2;
@@ -91,7 +93,8 @@
         #message-area {
             margin-top: 15px;
             font-size: 0.9em;
-            color: #e74c3c; /* Eine auffällige Farbe */
+            color: #c0392b; /* Eine auffällige Farbe */
+            font-weight: 600;
             min-height: 20px; /* Verhindert Springen des Layouts */
         }
 
@@ -108,8 +111,8 @@
     <div class="app-wrapper">
         <div class="container">
             <div id="date-line"></div>
-            <h2 id="prompt-title">Lädt...</h2>
-            <p id="prompt-description"></p>
+            <h2 id="prompt-title">Einen Moment...</h2>
+            <p id="prompt-description">Deine Inspiration wird geladen.</p>
             <button id="new-prompt-button">Neue Inspiration</button>
             <div id="message-area"></div>
         </div>
@@ -130,10 +133,10 @@
             const MAX_CLICKS_PER_DAY = 3;
             const RECENTLY_USED_LIMIT = 3; // Wie viele letzte Prompts merken?
             const dailyGradients = [
-                'linear-gradient(135deg, #f5e1e1, #e6d3f2)',
-                'linear-gradient(135deg, #d3e6f2, #e1f5e1)',
-                'linear-gradient(135deg, #f2e6d3, #f5e1e1)',
-                'linear-gradient(135deg, #e1f5f5, #d3e6f2)'
+                'linear-gradient(135deg, #f5e1e1, #e6d3f2)', // Rosa zu Lavendel
+                'linear-gradient(135deg, #d3e6f2, #e1f5e1)', // Babyblau zu Minze
+                'linear-gradient(135deg, #f2e6d3, #f5e1e1)', // Pfirsich zu Rosa
+                'linear-gradient(135deg, #e1f5f5, #d3e6f2)'  // Cyan zu Babyblau
             ];
 
             let prompts = []; // Wird mit den Daten aus der JSON-Datei gefüllt
@@ -147,11 +150,17 @@
                 
                 try {
                     prompts = await fetchPrompts();
-                    displayNewPrompt();
+                    // Zeigt den ersten Prompt nur an, wenn noch keiner für heute gezogen wurde.
+                    if (userState.clicks === 0) {
+                        handleNewPromptRequest();
+                    } else {
+                        // Zeigt den letzten Prompt des Tages wieder an
+                        displayPromptByIndex(userState.lastUsedIndices[userState.lastUsedIndices.length - 1]);
+                    }
                     updateButtonState();
                 } catch (error) {
                     promptTitle.textContent = "Fehler";
-                    promptDescription.textContent = "Inspirationen konnten nicht geladen werden.";
+                    promptDescription.textContent = "Inspirationen konnten nicht geladen werden. Bitte prüfe die prompts.json Datei.";
                     console.error("Fehler beim Laden der Prompts:", error);
                 }
             }
@@ -197,39 +206,24 @@
                 const today = new Date();
                 const options = { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
                 const formattedDate = today.toLocaleDateString('de-DE', options);
-                dateLine.textContent = `${formattedDate} - deine heutige Inspiration`;
+                // ANGEPASST: HTML mit <br> für den Zeilenumbruch verwenden
+                dateLine.innerHTML = `${formattedDate}<br>- deine heutige Inspiration -`;
             }
 
-            function displayNewPrompt() {
-                if (prompts.length === 0) return;
-
-                // Filtert die bereits kürzlich genutzten Prompts heraus
-                const availablePrompts = prompts
-                    .map((prompt, index) => ({ ...prompt, originalIndex: index }))
-                    .filter(prompt => !userState.lastUsedIndices.includes(prompt.originalIndex));
-
-                // Wenn alle schon mal dran waren, wird die "zuletzt gesehen" Liste zurückgesetzt.
-                const listToUse = availablePrompts.length > 0 ? availablePrompts : prompts;
-
-                const randomIndex = Math.floor(Math.random() * listToUse.length);
-                const selectedPrompt = listToUse[randomIndex];
-
-                promptTitle.textContent = selectedPrompt.title;
-                promptDescription.textContent = selectedPrompt.description;
-
-                // Update der "zuletzt gesehen" Liste
-                userState.lastUsedIndices.push(selectedPrompt.originalIndex);
-                if (userState.lastUsedIndices.length > RECENTLY_USED_LIMIT) {
-                    userState.lastUsedIndices.shift(); // Entfernt das älteste Element
+            function displayPromptByIndex(index) {
+                if (prompts.length > 0 && index !== undefined && prompts[index]) {
+                    const selectedPrompt = prompts[index];
+                    promptTitle.textContent = selectedPrompt.title;
+                    promptDescription.textContent = selectedPrompt.description;
                 }
-                saveState();
             }
             
             function updateButtonState() {
                 messageArea.textContent = ''; // Nachricht zurücksetzen
                 if (userState.clicks >= MAX_CLICKS_PER_DAY) {
                     newPromptButton.disabled = true;
-                    messageArea.textContent = 'Denk nicht zu viel nach und mal jetzt einfach für diese Idee.';
+                    // ANGEPASST: Neue, positivere Formulierung
+                    messageArea.textContent = 'Die Wahl ist getroffen! Jetzt wird gezeichnet.';
                 } else if (userState.clicks === MAX_CLICKS_PER_DAY - 1) {
                     messageArea.textContent = 'Du hast nur noch eine Chance.';
                     newPromptButton.disabled = false;
@@ -238,12 +232,38 @@
                 }
             }
 
+            function handleNewPromptRequest() {
+                if (prompts.length === 0) return;
+
+                // Filtert die bereits kürzlich genutzten Prompts heraus
+                const availablePrompts = prompts
+                    .map((prompt, index) => ({ ...prompt, originalIndex: index }))
+                    .filter(prompt => !userState.lastUsedIndices.includes(prompt.originalIndex));
+                
+                let listToUse = availablePrompts;
+                // Wenn alle schon mal dran waren, wird die "zuletzt gesehen" Liste zurückgesetzt.
+                if (availablePrompts.length === 0 && prompts.length > 0) {
+                    userState.lastUsedIndices = [];
+                    listToUse = prompts.map((prompt, index) => ({ ...prompt, originalIndex: index }));
+                }
+
+                const randomIndex = Math.floor(Math.random() * listToUse.length);
+                const selectedPrompt = listToUse[randomIndex];
+                
+                displayPromptByIndex(selectedPrompt.originalIndex);
+
+                // Update der "zuletzt gesehen" Liste
+                userState.lastUsedIndices.push(selectedPrompt.originalIndex);
+                if (userState.lastUsedIndices.length > RECENTLY_USED_LIMIT) {
+                    userState.lastUsedIndices.shift(); // Entfernt das älteste Element
+                }
+            }
 
             // --- EVENT LISTENER FÜR DEN BUTTON ---
             newPromptButton.addEventListener('click', () => {
                 if (userState.clicks < MAX_CLICKS_PER_DAY) {
                     userState.clicks++;
-                    displayNewPrompt();
+                    handleNewPromptRequest();
                     updateButtonState();
                     saveState();
                 }
