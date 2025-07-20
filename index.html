@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Inspiration</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            padding: 40px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2em;
+            color: #333;
+        }
+        button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            background-color: #007aff;
+            color: white;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="prompt">Hier steht deine Inspiration...</h1>
+        <button onclick="neuerSatz()">Neue Inspiration</button>
+    </div>
+
+    <script>
+        const saetze = [
+            // HIER DEINE SÄTZE EINFÜGEN
+            "Zeichne einen schwebenden Leuchtturm.",
+            "Was wäre, wenn Tiere Werkzeuge benutzen könnten?",
+            "Ein Roboter, der versucht, eine Katze zu streicheln.",
+            "Ein Baumhaus in einer riesigen Pilzlandschaft.",
+            "Ein Porträt aus geometrischen Formen."
+            // DER LETZTE SATZ HAT KEIN KOMMA
+        ];
+
+        const promptAnzeige = document.getElementById('prompt');
+
+        function neuerSatz() {
+            const zufallsIndex = Math.floor(Math.random() * saetze.length);
+            promptAnzeige.innerText = saetze[zufallsIndex];
+        }
+
+        // Zeigt direkt beim Laden einen ersten Satz an
+        neuerSatz();
+    </script>
+
+</body>
+</html>
