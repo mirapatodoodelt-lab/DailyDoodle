@@ -1,5 +1,9 @@
 [
   {
+    "title": "Ein Tag im Leben von...",
+    "description": "Zeichne eine alltägliche Szene aus der Perspektive eines Tieres, einer Pflanze oder eines Gegenstands."
+  },
+  {
     "title": "Hinter der Tür",
     "description": "Stelle dir vor, was sich hinter einer geheimnisvollen Tür verbirgt."
   },
@@ -18,5 +22,249 @@
   {
     "title": "Unmögliche Kombination",
     "description": "Kombiniere zwei Dinge, die nicht zusammenpassen, z. B. einen Fisch mit Flügeln oder eine Stadt unter Wasser."
+  },
+  {
+    "title": "Schattenwesen",
+    "description": "Zeichne ein Wesen, das aus Schatten besteht, und seine Interaktion mit Licht."
+  },
+  {
+    "title": "Postkarte aus einer anderen Welt",
+    "description": "Gestalte eine Postkarte, die jemand aus einer fiktiven Welt an dich schicken würde."
+  },
+  {
+    "title": "Emotionen visualisieren",
+    "description": "Wähle eine Emotion und stelle sie in Farben, Formen oder einem Charakter dar."
+  },
+  {
+    "title": "Was wäre wenn...",
+    "description": "Visualisiere eine alternative Realität, z. B. fliegende Städte oder ein Leben im Weltall."
+  },
+  {
+    "title": "Meine geheime Superkraft",
+    "description": "Zeichne dich mit einer völlig absurden, aber nützlichen Superkraft."
+  },
+  {
+    "title": "Ein Tag als Fabelwesen",
+    "description": "Wie würde dein Alltag aussehen, wenn du ein Drache, eine Meerjungfrau oder ein Kobold wärst?"
+  },
+  {
+    "title": "Alien-Porträt",
+    "description": "Kreiere einen außerirdischen Charakter mit einzigartigen Merkmalen."
+  },
+  {
+    "title": "Monster unter dem Bett",
+    "description": "Stelle dir vor, es gibt tatsächlich eines … aber es ist nicht unbedingt böse."
+  },
+  {
+    "title": "Mechanische Kreatur",
+    "description": "Kombiniere ein Tier mit einer Maschine und skizziere das Ergebnis."
+  },
+  {
+    "title": "Lebendige Gegenstände",
+    "description": "Was wäre, wenn dein Stuhl oder deine Tasse ein Eigenleben hätten?"
+  },
+  {
+    "title": "Mini-Wunderland",
+    "description": "Wie sähe eine Stadt aus, die in einer Obstschale oder einem Bücherregal existiert?"
+  },
+  {
+    "title": "Alternative Realität",
+    "description": "Was wäre, wenn die Schwerkraft plötzlich nicht mehr funktionieren würde?"
+  },
+  {
+    "title": "Spielzeug mit Persönlichkeit",
+    "description": "Zeichne ein Spielzeug aus deiner Kindheit und gib ihm eine eigene Geschichte."
+  },
+  {
+    "title": "Die geheime Welt der Pflanzen",
+    "description": "Was machen Pflanzen, wenn niemand hinsieht?"
+  },
+  {
+    "title": "Doppelbelichtung",
+    "description": "Kombiniere zwei unerwartete Motive in einer einzigen Zeichnung."
+  },
+  {
+    "title": "Falsche Perspektive",
+    "description": "Zeichne eine Szene, bei der die Perspektive bewusst verzerrt ist."
+  },
+  {
+    "title": "Schwarz-Weiß gegen Farbe",
+    "description": "Erstelle ein Bild, bei dem nur ein einziges Element farbig ist."
+  },
+  {
+    "title": "Tag & Nacht",
+    "description": "Zeichne denselben Ort einmal bei Tag und einmal bei Nacht."
+  },
+  {
+    "title": "Verkehrte Welt",
+    "description": "Was wäre, wenn Menschen unter Wasser leben und Fische an Land existieren würden?"
+  },
+  {
+    "title": "Mein inneres Wesen",
+    "description": "Visualisiere dein aktuelles Gefühl als Gestalt oder Landschaft."
+  },
+  {
+    "title": "Der Klang einer Emotion",
+    "description": "Wie würde Freude, Wut oder Melancholie als abstrakte Formen oder Muster aussehen?"
+  },
+  {
+    "title": "Tagebuch einer Farbe",
+    "description": "Wähle eine Farbe und erstelle eine Seite nur mit Motiven in dieser Farbe."
+  },
+  {
+    "title": "Wetter & Gefühle",
+    "description": "Verknüpfe Wetterphänomene mit Emotionen (z. B. Traurigkeit als sanfter Regen)."
+  },
+  {
+    "title": "Schatten und Licht",
+    "description": "Zeichne eine Szene nur mit Schatten und Silhouetten."
+  },
+  {
+    "title": "Energie-Landschaft",
+    "description": "Zeichne dein heutiges Energielevel als Landschaft."
+  },
+  {
+    "title": "Stimmungs-Tier",
+    "description": "Wenn deine Stimmung ein Tier wäre – wie sähe es aus?"
+  },
+  {
+    "title": "Wort-Erfinder",
+    "description": "Finde drei Wörter, die es noch nicht gibt, aber geben sollte."
+  },
+  {
+    "title": "Brief in die Zukunft",
+    "description": "Schreibe einen Brief an dein zukünftiges Ich in drei Tagen."
+  },
+  {
+    "title": "Absurdes Küchengerät",
+    "description": "Entwirf ein absurdes Küchengerät, das es nur bei dir gäbe."
+  },
+  {
+    "title": "Karte des Geistes",
+    "description": "Male eine kleine Karte deines heutigen Gedankenraums."
+  },
+  {
+    "title": "Dialog der Stimmen",
+    "description": "Schreibe einen Dialog zwischen „Kritik“ und „Neugier“."
+  },
+  {
+    "title": "Innerer Wetterbericht",
+    "description": "Beschreibe dein Innenleben als Wetterbericht."
+  },
+  {
+    "title": "Farbe des Tages",
+    "description": "Erfinde eine Farbe, die du heute gebraucht hättest."
+  },
+  {
+    "title": "Störung wegschneiden",
+    "description": "Schneide (in Gedanken oder auf Papier) etwas weg, das dich heute gestört hat."
+  },
+  {
+    "title": "Neuer Sinn",
+    "description": "Nimm dir eine Alltagssache (z.B. Löffel, Socke, Wasserkocher) und gib ihr einen neuen Sinn."
+  },
+  {
+    "title": "Theater des Tages",
+    "description": "Wenn dein Tag ein Theaterstück wäre: Wer spielt mit? Was bleibt offen?"
+  },
+  {
+    "title": "Geräusch des Moments",
+    "description": "Notiere ein Geräusch, das heute zu dir passt – und eins, das du brauchst."
+  },
+  {
+    "title": "Moment der Unentschlossenheit",
+    "description": "Male oder beschreibe den Moment, in dem du dich heute nicht entscheiden konntest."
+  },
+  {
+    "title": "Möbel des Perfektionismus",
+    "description": "Wenn dein Perfektionismus ein Möbelstück wäre – wie sähe es aus?"
+  },
+  {
+    "title": "Geschichte eines Gefühls",
+    "description": "Gib einem Gefühl von heute einen Namen und eine Geschichte."
+  },
+  {
+    "title": "Blindes Doodle",
+    "description": "Zeichne ein Doodle mit geschlossenen Augen – und schau, was du darin entdeckst."
+  },
+  {
+    "title": "Absurde Schlagzeilen",
+    "description": "Beschreibe deinen Tag in drei absurden Schlagzeilen."
+  },
+  {
+    "title": "Kreatives Haustier",
+    "description": "Erfinde ein kreatives Haustier, das dir Mut macht."
+  },
+  {
+    "title": "Schlafendes Gedankenkarussell",
+    "description": "Male dein Gedankenkarussell – aber alle Pferde schlafen."
+  },
+  {
+    "title": "Feiertag des Tages",
+    "description": "Erfinde einen Feiertag für heute. Was wird gefeiert, wie sieht er aus?"
+  },
+  {
+    "title": "Schatten mit Eigenleben",
+    "description": "Was würde passieren, wenn dein Schatten plötzlich ein Eigenleben hätte?"
+  },
+  {
+    "title": "Flugobjekt aus Unerledigtem",
+    "description": "Bau ein Flugobjekt aus den Dingen, die du heute nicht erledigt hast."
+  },
+  {
+    "title": "Pilze der Ideen",
+    "description": "Stell dir vor, deine Ideen wachsen wie Pilze – wo tauchen sie auf, und wie sehen sie aus?"
+  },
+  {
+    "title": "Heimat der gescheiterten Ideen",
+    "description": "Beschreibe einen Ort, an dem alle gescheiterten Ideen wohnen – wie lebt es sich dort?"
+  },
+  {
+    "title": "Monster der Erwartungen",
+    "description": "Zeichne ein Monster aus lauter Erwartungen – und dann verpass ihm einen lustigen Hut."
+  },
+  {
+    "title": "Gedicht aus Geräuschen",
+    "description": "Erfinde ein Gedicht, das nur aus Geräuschen besteht."
+  },
+  {
+    "title": "Form eines Wunsches",
+    "description": "Welche Form hätte dein heutiger Wunsch, wenn man ihn auf ein Sofa setzen würde?"
+  },
+  {
+    "title": "Radiosender des Ichs",
+    "description": "Wenn du heute ein Radiosender wärst – welche drei Sendungen liefen?"
+  },
+  {
+    "title": "Gefühlskaugummi",
+    "description": "Erfinde ein „Gefühlskaugummi“ – welche Sorte wäre heute dran?"
+  },
+  {
+    "title": "Hobby des inneren Kritikers",
+    "description": "Gib deinem inneren Kritiker ein Hobby. (Strickt er? Macht er Origami?)"
+  },
+  {
+    "title": "Der ungenutzte Weg",
+    "description": "Zeichne ein Labyrinth – und dann markiere den Weg, den du heute NICHT gegangen bist."
+  },
+  {
+    "title": "Falsche Requisiten",
+    "description": "Stell dir vor, dein Tag war ein Theaterstück, aber die Requisiten sind alle falsch. Was nun?"
+  },
+  {
+    "title": "Amulett gegen Selbstzweifel",
+    "description": "Bastle (mit Worten oder Linien) ein Schutzamulett gegen Selbstzweifel."
+  },
+  {
+    "title": "Neue Spezies",
+    "description": "Wenn dein heutiges Ich eine neue Spezies wäre – wie würde es heißen?"
+  },
+  {
+    "title": "Streitgespräch der Farben",
+    "description": "Lass zwei Farben ein Streitgespräch führen. Wer gewinnt?"
+  },
+  {
+    "title": "Ritual zum Tagesende",
+    "description": "Erfinde ein Ritual, das deinen Tag feierlich beenden könnte – je absurder, desto besser."
   }
 ]
